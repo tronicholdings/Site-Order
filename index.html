@@ -180,6 +180,25 @@ body{
 }
 .authtab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 
+/* Tier 안내 팝업 */
+.tiermodal{
+  position:fixed;inset:0;background:rgba(11,27,51,.72);z-index:250;
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.tiermodal.open{display:flex}
+.tiermodal-sheet{
+  background:#fff;border-radius:18px;width:100%;max-width:420px;
+  overflow:hidden;max-height:88vh;display:flex;flex-direction:column;
+}
+.tiermodal-brand{
+  background:linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%);
+  padding:22px 18px;text-align:center;
+}
+.tiermodal-brand .premium{color:#fff;font-size:24px;font-weight:700;letter-spacing:1px}
+.tiermodal-brand .k{color:var(--orange);font-size:24px;font-weight:800;letter-spacing:1px}
+.tiermodal-body{padding:18px;font-size:13.5px;line-height:1.55;color:var(--text);overflow-y:auto}
+.tiermodal-sheet .btn-primary{margin:0 18px 18px;width:calc(100% - 36px);}
+
 /* Price lock prompt (guest mode) */
 .pricelock{
   display:inline-block;font-size:11px;font-weight:700;color:#2563EB;
@@ -359,7 +378,7 @@ body{
 </noscript>
 
 <div class="brand">
-  <div class="brand-row"><span class="premium">PREMIUM</span><span class="k">K</span><span class="ver">Ver.4.6</span></div>
+  <div class="brand-row"><span class="premium">PREMIUM</span><span class="k">K</span><span class="ver">Ver.4.9</span></div>
   <div class="brand-sub">Site Order · 현장 주문</div>
   <div class="step-dots">
     <div class="step-dot on" id="dot1"></div>
@@ -378,6 +397,23 @@ body{
   <a href="#" id="adminLink" style="display:none;margin-left:8px;" onclick="location.href='https://premium-k-backend.vercel.app/admin.html';return false;">Admin 관리자</a>
 </div>
 <div class="statsbar" id="statsBar" style="display:none;"></div>
+
+<!-- ===== Tier 안내 팝업 (로고 포함) ===== -->
+<div class="tiermodal" id="tierNoticeModal">
+  <div class="tiermodal-sheet">
+    <div class="tiermodal-brand"><span class="premium">PREMIUM</span><span class="k">K</span></div>
+    <div class="tiermodal-body">
+      <p><b>Premium K offers 3 pricing tiers based on purchase volume — Tier 1 gets the best pricing.</b><br>
+      New accounts start at Tier 3. If you plan to order in bulk, ask your sales rep to upgrade your tier.</p>
+      <p style="margin-top:10px;">Email your Seller's Permit to <b>sales@tronicholdings.com</b> and you'll be automatically upgraded to Tier 2.</p>
+      <p style="margin-top:10px;"><b>저희 Premium K는 구매 금액별로 Tier 3단계를 운영중입니다.</b><br>
+      대량 구매 의향이 있으시면 담당 영업사원에게 요청하여 Tier를 올리실 수 있습니다.<br>
+      처음 가입하시면 Tier 3로 자동 가입됩니다.</p>
+      <p style="margin-top:10px;">Seller's Permit(사업자 재판매 허가증)을 <b>sales@tronicholdings.com</b>으로 보내주시면 자동으로 Tier 2로 승격됩니다.</p>
+    </div>
+    <button class="btn-primary" onclick="closeTierNotice()">Got it 확인했습니다</button>
+  </div>
+</div>
 
 <!-- ===== 로그인/회원가입 모달 ===== -->
 <div class="authmodal" id="authModal">
@@ -752,12 +788,18 @@ function openAuthModal(tab) {
   switchAuthTab(tab || 'login');
 }
 function closeAuthModal() { document.getElementById('authModal').classList.remove('open'); }
+let tierNoticeShown = false;
 function switchAuthTab(tab) {
   document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
   document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
   document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
   document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
+  if (tab === 'register' && !tierNoticeShown) {
+    tierNoticeShown = true;
+    document.getElementById('tierNoticeModal').classList.add('open');
+  }
 }
+function closeTierNotice() { document.getElementById('tierNoticeModal').classList.remove('open'); }
 
 async function doLogin() {
   const phone = document.getElementById('loginPhone').value.trim();
@@ -812,7 +854,7 @@ async function doRegister() {
   errEl.style.display = 'none';
   try {
     await apiFetch('/auth/register', { method: 'POST', body: JSON.stringify({ phone, password, email, companyName, address, repName }) });
-    alert('Your registration has been submitted. Prices will be visible once an admin approves your account. Please log in now.\n\n가입 신청이 접수되었습니다. 관리자 승인이 완료되어야 가격이 보입니다. 이제 로그인해주세요.');
+    alert('Your registration has been submitted as Tier 3. Prices will be visible once an admin approves your account. Ask your sales rep to upgrade your tier for bulk orders, or email your Seller\'s Permit to sales@tronicholdings.com to be automatically upgraded to Tier 2. Please log in now.\n\n가입 신청이 Tier 3로 접수되었습니다. 관리자 승인이 완료되어야 가격이 보입니다. 대량 구매 시 담당 영업사원에게 Tier 상향을 요청하시거나, Seller\'s Permit을 sales@tronicholdings.com으로 보내시면 자동으로 Tier 2로 승격됩니다. 이제 로그인해주세요.');
     switchAuthTab('login');
     document.getElementById('loginPhone').value = phone;
   } catch (e) {
