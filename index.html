@@ -156,6 +156,33 @@ body{
 .authbar a{color:#0B1B33;font-weight:700;text-decoration:underline;}
 .authbar-in{background:#EEF1F8;color:var(--navy);}
 .authbar-in a{color:var(--orange);}
+.tier-badge{
+  display:inline-block;padding:2px 9px;border-radius:999px;font-weight:800;font-size:11px;
+  letter-spacing:.2px;border:1px solid transparent;vertical-align:middle;
+}
+.tier-badge.platinum{
+  background:linear-gradient(120deg,#C9D6EE 0%,#8FA6D6 25%,#EAF1FF 50%,#8FA6D6 75%,#C9D6EE 100%);
+  background-size:250% 100%;
+  color:#1F2E4D;border-color:#7C93C4;
+  animation:tier-shimmer 3.2s ease-in-out infinite;
+}
+@keyframes tier-shimmer{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+.tier-badge.gold{
+  background:linear-gradient(120deg,#F6C94C 0%,#B8860B 25%,#FFF3C4 50%,#B8860B 75%,#F6C94C 100%);
+  background-size:250% 100%;
+  color:#5C4300;border-color:#C99A2A;
+  animation:tier-shimmer 3.2s ease-in-out infinite;
+}
+.tier-badge.silver{
+  background:linear-gradient(120deg,#D7DADF 0%,#9AA0A8 25%,#F7F8FA 50%,#9AA0A8 75%,#D7DADF 100%);
+  background-size:250% 100%;
+  color:#3E4349;border-color:#AEB3B9;
+  animation:tier-shimmer 3.2s ease-in-out infinite;
+}
 .statsbar{
   background:var(--navy);color:#fff;font-size:12px;text-align:center;padding:8px 10px;
   display:flex;justify-content:center;gap:16px;flex-wrap:wrap;
@@ -381,7 +408,7 @@ body{
 </noscript>
 
 <div class="brand">
-  <div class="brand-row"><span class="premium">PREMIUM</span><span class="k">K</span><span class="ver">Ver.5.3</span></div>
+  <div class="brand-row"><span class="premium">PREMIUM</span><span class="k">K</span><span class="ver">Ver.5.7</span></div>
   <div class="brand-sub">Site Order · 현장 주문</div>
   <div class="step-dots">
     <div class="step-dot on" id="dot1"></div>
@@ -406,13 +433,13 @@ body{
   <div class="tiermodal-sheet">
     <div class="tiermodal-brand"><span class="premium">PREMIUM</span><span class="k">K</span></div>
     <div class="tiermodal-body">
-      <p><b>Premium K offers 3 pricing tiers based on purchase volume — Tier 1 gets the best pricing.</b><br>
-      New accounts start at Tier 3. If you plan to order in bulk, ask your sales rep to upgrade your tier.</p>
-      <p style="margin-top:10px;">Email your Seller's Permit to <b>sales@tronicholdings.com</b> and you'll be automatically upgraded to Tier 2.</p>
-      <p style="margin-top:10px;"><b>저희 Premium K는 구매 금액별로 Tier 3단계를 운영중입니다.</b><br>
-      대량 구매 의향이 있으시면 담당 영업사원에게 요청하여 Tier를 올리실 수 있습니다.<br>
-      처음 가입하시면 Tier 3로 자동 가입됩니다.</p>
-      <p style="margin-top:10px;">Seller's Permit(사업자 재판매 허가증)을 <b>sales@tronicholdings.com</b>으로 보내주시면 자동으로 Tier 2로 승격됩니다.</p>
+      <p><b>Premium K offers 3 pricing tiers based on purchase volume — Platinum gets the best pricing.</b><br>
+      New accounts start at Silver. If you plan to order in bulk, ask your sales rep to upgrade your tier.</p>
+      <p style="margin-top:10px;">Email your Seller's Permit to <b>sales@tronicholdings.com</b> and you'll be automatically upgraded to Gold.</p>
+      <p style="margin-top:10px;"><b>저희 Premium K는 구매 금액별로 플래티늄/골드/실버 3단계를 운영중입니다.</b><br>
+      대량 구매 의향이 있으시면 담당 영업사원에게 요청하여 등급을 올리실 수 있습니다.<br>
+      처음 가입하시면 실버(Silver)로 자동 가입됩니다.</p>
+      <p style="margin-top:10px;">Seller's Permit(사업자 재판매 허가증)을 <b>sales@tronicholdings.com</b>으로 보내주시면 자동으로 골드(Gold)로 승격됩니다.</p>
     </div>
     <button class="btn-primary" onclick="closeTierNotice()">Got it 확인했습니다</button>
   </div>
@@ -624,15 +651,15 @@ body{
     <div class="tiermodal-body">
       <p><b>Premium K Pricing Tiers 등급 안내</b></p>
       <p style="margin-top:10px;">
-        <b>Tier 1</b> — Large wholesale pricing 대형 홀세일 가격<br>
+        <span class="tier-badge platinum">Platinum 플래티늄</span> — Large wholesale pricing 대형 홀세일 가격<br>
         Monthly purchase $20,000+ 월 매입 총액 $20,000 이상 업체
       </p>
       <p style="margin-top:8px;">
-        <b>Tier 2</b> — Markets, restaurants, etc. 마켓, 레스토랑 등<br>
+        <span class="tier-badge gold">Gold 골드</span> — Markets, restaurants, etc. 마켓, 레스토랑 등<br>
         Monthly purchase $2,000–$20,000 월 매입 총액 $2,000 이상 $20,000 미만 업체
       </p>
       <p style="margin-top:8px;">
-        <b>Tier 3</b> — New accounts, etc. 신규업체 등<br>
+        <span class="tier-badge silver">Silver 실버</span> — New accounts, etc. 신규업체 등<br>
         Monthly purchase under $2,000 월 매입 총액 $2,000 이하 업체
       </p>
       <p style="margin-top:10px;">Not sure which tier fits your business? Tap below and we'll review it for you.<br>
@@ -760,10 +787,10 @@ if (!deviceId) {
 
 function apiUrl(path) { return CONFIG.BACKEND_API_URL.replace(/\/$/, '') + path; }
 
-const TIER_LABEL_TEXT = {
-  tier1: 'Tier 1 등급',
-  tier2: 'Tier 2 등급',
-  tier3: 'Tier 3 등급',
+const TIER_INFO = {
+  tier1: { label: 'Platinum 플래티늄', cls: 'platinum' },
+  tier2: { label: 'Gold 골드', cls: 'gold' },
+  tier3: { label: 'Silver 실버', cls: 'silver' },
 };
 
 async function apiFetch(path, options = {}) {
@@ -785,8 +812,8 @@ function updateAuthBar() {
   if (authUser) {
     guestBar.style.display = 'none';
     userBar.style.display = 'block';
-    document.getElementById('authUserLabel').textContent = authUser.approved
-      ? `${authUser.phone} (Approved 승인됨)${authUser.tier ? ' · ' + TIER_LABEL_TEXT[authUser.tier] : ''}`
+    document.getElementById('authUserLabel').innerHTML = authUser.approved
+      ? `${authUser.phone} (Approved 승인됨)${authUser.tier ? ` <span class="tier-badge ${TIER_INFO[authUser.tier].cls}">${TIER_INFO[authUser.tier].label}</span>` : ''}`
       : `${authUser.phone} (Pending approval 승인 대기중)`;
     document.getElementById('adminLink').style.display = authUser.isAdmin ? 'inline' : 'none';
     if (authUser.approved) loadPurchaseStats();
@@ -852,12 +879,12 @@ async function requestTierUpgrade() {
     return;
   }
   const ok = confirm(
-    'Tier 1: Large wholesale, $20,000+/month\n' +
-    'Tier 2: Markets/Restaurants, $2,000–$20,000/month\n' +
-    'Tier 3: New accounts, under $2,000/month\n\n' +
-    'Tier 1: 대형 홀세일, 월매입 $20,000 이상\n' +
-    'Tier 2: 마켓/레스토랑 등, 월매입 $2,000~$20,000\n' +
-    'Tier 3: 신규업체 등, 월매입 $2,000 이하\n\n' +
+    'Platinum: Large wholesale, $20,000+/month\n' +
+    'Gold: Markets/Restaurants, $2,000–$20,000/month\n' +
+    'Silver: New accounts, under $2,000/month\n\n' +
+    'Platinum(플래티늄): 대형 홀세일, 월매입 $20,000 이상\n' +
+    'Gold(골드): 마켓/레스토랑 등, 월매입 $2,000~$20,000\n' +
+    'Silver(실버): 신규업체 등, 월매입 $2,000 이하\n\n' +
     'Would you like to request a tier review?\n' +
     '등급 검토를 요청하시겠습니까?'
   );
@@ -925,7 +952,7 @@ async function doRegister() {
   errEl.style.display = 'none';
   try {
     await apiFetch('/auth/register', { method: 'POST', body: JSON.stringify({ phone, password, email, companyName, address, repName }) });
-    alert('Your registration has been submitted as Tier 3. Prices will be visible once an admin approves your account. Ask your sales rep to upgrade your tier for bulk orders, or email your Seller\'s Permit to sales@tronicholdings.com to be automatically upgraded to Tier 2. Please log in now.\n\n가입 신청이 Tier 3로 접수되었습니다. 관리자 승인이 완료되어야 가격이 보입니다. 대량 구매 시 담당 영업사원에게 Tier 상향을 요청하시거나, Seller\'s Permit을 sales@tronicholdings.com으로 보내시면 자동으로 Tier 2로 승격됩니다. 이제 로그인해주세요.');
+    alert('Your registration has been submitted as Silver. Prices will be visible once an admin approves your account. Ask your sales rep to upgrade your tier for bulk orders, or email your Seller\'s Permit to sales@tronicholdings.com to be automatically upgraded to Gold. Please log in now.\n\n가입 신청이 실버(Silver)로 접수되었습니다. 관리자 승인이 완료되어야 가격이 보입니다. 대량 구매 시 담당 영업사원에게 등급 상향을 요청하시거나, Seller\'s Permit을 sales@tronicholdings.com으로 보내시면 자동으로 골드(Gold)로 승격됩니다. 이제 로그인해주세요.');
     switchAuthTab('login');
     document.getElementById('loginPhone').value = phone;
   } catch (e) {
@@ -1669,6 +1696,7 @@ restoreCustInfo();
 updateAuthBar();
 applyDefaultRep();
 loadProducts();
+track('app_open'); // 방문(세션) 측정용 — 클릭 없이 둘러보기만 해도 방문 1건으로 잡히게 함
 </script>
 
 </body>
